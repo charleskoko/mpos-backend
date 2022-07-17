@@ -4,15 +4,6 @@ namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
 
-/*
-|--------------------------------------------------------------------------
-| Api Response Trait
-|--------------------------------------------------------------------------
-|
-| This trait will be used for any response we sent to clients.
-|
-*/
-
 trait ApiResponse
 {
 
@@ -22,7 +13,6 @@ trait ApiResponse
             'data' => $data
         ], $code);
     }
-
 
     protected function error(int $code, $data = null, string $message = null): JsonResponse
     {
