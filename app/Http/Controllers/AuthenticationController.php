@@ -37,7 +37,7 @@ class AuthenticationController extends Controller
         return $this->success([
             'user' => UserResource::make($createdUser),
             'token' => $createdUserToken
-        ]);
+        ],201);
     }
 
     public function login(UserLoginRequest $request): JsonResponse
@@ -49,13 +49,13 @@ class AuthenticationController extends Controller
         }
         $authenticationData = $this->userConnection($userCredentials['email']);
 
-        return $this->success($authenticationData);
+        return $this->success($authenticationData,201);
     }
 
     public function logout(Request $request)
     {
         Auth::user()->tokens()->delete();
-        return $this->success(null, 200);
+        return $this->success(null, 204);
     }
 
     private function isUserCredentialFalse(array $userCredential): bool
