@@ -11,6 +11,7 @@ use Domain\Users\Actions\CreateAuthenticatedUserTokenAction;
 use Domain\Users\Actions\CreateUserAction;
 use Domain\Users\DataTransferObjects\UserData;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends Controller
@@ -50,7 +51,12 @@ class AuthenticationController extends Controller
 
         return $this->success($authenticationData);
     }
-    
+
+    public function logout(Request $request)
+    {
+        Auth::user()->tokens()->delete();
+        return $this->success(null, 200);
+    }
 
     private function isUserCredentialFalse(array $userCredential): bool
     {
