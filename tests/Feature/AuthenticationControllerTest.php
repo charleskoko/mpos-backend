@@ -28,7 +28,7 @@ class AuthenticationControllerTest extends TestCase
             'password' => '12345678',
             'password_confirmation' => '12345678',
         ];
-        $response = $this->post(route('user_register'), $newUserData);
+        $response = $this->post(route('user.register'), $newUserData);
         $response->assertStatus(201);
     }
 
@@ -38,14 +38,14 @@ class AuthenticationControllerTest extends TestCase
             'email' => $this->user->email,
             'password' => 'password'
         ];
-        $response = $this->post(route('user_login'), $userCredential);
+        $response = $this->post(route('user.login'), $userCredential);
         $response->assertStatus(201);
     }
 
     public function testUserCanLoggedOut()
     {
         Sanctum::actingAs($this->user);
-        $response = $this->post(route('user_logout'));
+        $response = $this->post(route('user.logout'));
         $response->assertStatus(204);
     }
 }
