@@ -31,9 +31,9 @@ class ProductController extends Controller
     {
         $authUser = Auth::user();
 
-        $authUserProduct = $authUser->products;
+        $authUserProducts = $authUser->products;
 
-        return $this->success(['products' => $authUserProduct],);
+        return $this->success([ProductResource::collection($authUserProducts)],);
     }
 
     /**
