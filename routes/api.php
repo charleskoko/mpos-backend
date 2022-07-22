@@ -36,7 +36,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'orders'], function (){
             Route::get('/',[OrderController::class, 'index'])->name('orders.index');
             Route::post('/',[OrderController::class, 'store'])->name('orders.store');
-            Route::patch('/{order}', [OrderController::class, 'update'])->name('orders.update');
             Route::delete('/{order},',[OrderController::class, 'destroy'])->name('orders.destroy');
         });
     });

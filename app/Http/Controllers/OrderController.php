@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderPostRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Traits\ApiResponse;
+use Domain\Orders\Actions\CreateOrderAction;
+use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
+use http\Env\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     use ApiResponse;
+    private CreateOrderAction $createOrderAction;
+
+    public function __construct(CreateOrderAction $createOrderAction)
+    {
+        $this->createOrderAction = $createOrderAction;
+    }
 
     /**
      * Display a listing of the resource.
@@ -27,6 +37,21 @@ class OrderController extends Controller
         return $this->success([OrderResource::collection($authUserOrders)],);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param OrderPostRequest $request
+     * @return JsonResponse
+     */
+
+    public function store(OrderPostRequest $request): JsonResponse
+    {
+        $orderLineItemsValidated = $request->validated();
+        $orderLineItemsData = MakeOrderLineItemsData::fromRequest($orderLineItemsValidated['addOrderLineItem']);
+        $order = ($this->createOrderAction)($orderLineItemsData);
+
+        return $this->success([OrderResource::make($order)],201);
+    }
 
     /**
      * Display the specified resource.

@@ -4,21 +4,21 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResource extends JsonResource
+class OrderLineItemResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
-        $order = $this->resource;
+        $orderLineItem = $this->resource;
         return [
-            'id' => $order->id,
-            'number' => $order->number,
-            'OrderLineItems' => OrderLineItemResource::collection($order->orderLineItems)
+            'product' => ProductResource::make($orderLineItem->product),
+            'price' => $orderLineItem->price,
+            'amount' => $orderLineItem->amount,
         ];
     }
 }

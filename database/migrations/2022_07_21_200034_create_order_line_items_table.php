@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('order_line_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->float('price');
+            $table->float('amount');
             $table->uuid('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->cascadeOnDelete();
             $table->uuid('product_id');

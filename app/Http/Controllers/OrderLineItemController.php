@@ -2,84 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderLineItemPostRequest;
+use App\Http\Resources\OrderLineItemResource;
 use App\Models\OrderLineItem;
-use Illuminate\Http\Request;
+use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 
 class OrderLineItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    use ApiResponse;
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OrderLineItem  $orderLineItem
-     * @return \Illuminate\Http\Response
+     * @param OrderLineItem $orderLineItem
+     * @return JsonResponse
      */
-    public function show(OrderLineItem $orderLineItem)
+    public function show(OrderLineItem $orderLineItem): JsonResponse
     {
-        //
+        return $this->success([OrderLineItemResource::make($orderLineItem)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OrderLineItem  $orderLineItem
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrderLineItem $orderLineItem)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrderLineItem  $orderLineItem
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param OrderLineItem $orderLineItem
+     * @return JsonResponse
      */
-    public function update(Request $request, OrderLineItem $orderLineItem)
+    public function update(OrderLineItemPostRequest $request, OrderLineItem $orderLineItem)
     {
-        //
+        $newOrderLineItemDataValidated = $request->validated();
+        $orderLineItem->update($newOrderLineItemDataValidated);
+
+        return $this->success([OrderLineItemResource::make($orderLineItem->refresh())]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OrderLineItem  $orderLineItem
-     * @return \Illuminate\Http\Response
+     * @param OrderLineItem $orderLineItem
+     * @return JsonResponse
      */
-    public function destroy(OrderLineItem $orderLineItem)
+    public function destroy(OrderLineItem $orderLineItem): JsonResponse
     {
-        //
+        $orderLineItem->delete();
+
+        return $this->success([], 204);
     }
 }

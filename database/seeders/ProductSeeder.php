@@ -29,6 +29,5 @@ class ProductSeeder extends Seeder
             'price' => 2000,
             'user_id' => $user->id
         ]);
-
     }
 }
