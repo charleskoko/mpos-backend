@@ -45,6 +45,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
             Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
         });
+
     });
 });
 

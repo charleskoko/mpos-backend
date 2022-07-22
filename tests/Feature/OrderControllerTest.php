@@ -55,7 +55,6 @@ class OrderControllerTest extends TestCase
     {
         $response = $this->get(route('orders.index'));
         $response->assertStatus(200);
-        $this->assertDatabaseCount('orders', 10);
     }
 
     public function testUserCanDeleteOrder()
