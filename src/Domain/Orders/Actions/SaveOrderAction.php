@@ -5,6 +5,7 @@ namespace Domain\Orders\Actions;
 use App\Models\Order;
 use App\Models\OrderLineItem;
 use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
+use Illuminate\Support\Facades\Auth;
 
 class SaveOrderAction
 {
@@ -14,7 +15,7 @@ class SaveOrderAction
     {
         $order = Order::create([
             'number' => $orderNumber,
-            'user_id' => auth()->id()
+            'user_id' => Auth::id()
         ]);
         foreach ($makeOrderLineItemsData->orderLineItemsData as $orderLineItem) {
             OrderLineItem::create([

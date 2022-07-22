@@ -6,8 +6,11 @@ use App\Models\Order;
 use App\Models\OrderLineItem;
 use App\Models\Product;
 use App\Models\User;
+use Domain\Orders\Events\NewOrderCreatedEvent;
+use Domain\Orders\Listeners\NewOrderCreatedListener;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -27,6 +30,7 @@ class OrderControllerTest extends TestCase
 
     public function testUserCanCreateOrder()
     {
+        Event::fake([NewOrderCreatedEvent::class]);
         $newOrderData = [
             'addOrderLineItem' => [
                 [
@@ -34,30 +38,17 @@ class OrderControllerTest extends TestCase
                     'amount' => $orderItemOneAmount = $this->faker->randomFloat(2, 100, 10000),
                     'price' => $orderItemOnePrice = $this->faker->randomDigit(),
                 ],
-                [
-                    'product_id' => $orderItemTwoProduct = Product::inRandomOrder()->first()->id,
-                    'amount' => $orderItemTwoAmount = $this->faker->randomFloat(2, 100, 10000),
-                    'price' => $orderItemTwoPrice = $this->faker->randomDigit(),
-                ],
-                [
-                    'product_id' => $orderItemThreeProduct = Product::inRandomOrder()->first()->id,
-                    'amount' => $orderItemThreeAmount = $this->faker->randomFloat(2, 100, 10000),
-                    'price' => $orderItemThreePrice = $this->faker->randomDigit(),
-                ],
-                [
-                    'product_id' => $orderItemFourProduct = Product::inRandomOrder()->first()->id,
-                    'amount' => $orderItemFourAmount = $this->faker->randomFloat(2, 100, 10000),
-                    'price' => $orderItemFourPrice = $this->faker->randomDigit(),
-                ]
             ]
         ];
-
         $response = $this->post(route('orders.store'), $newOrderData);
+        Event::assertDispatched(NewOrderCreatedEvent::class);
+        Event::assertListening(
+            NewOrderCreatedEvent::class,
+            NewOrderCreatedListener::class
+        );
+        $order = Order::latest()->first();
         $response->assertStatus(201);
         $this->assertDatabaseHas('order_line_items', ['product_id' => $orderItemOneProduct, 'amount' => $orderItemOneAmount, 'price' => $orderItemOnePrice]);
-        $this->assertDatabaseHas('order_line_items', ['product_id' => $orderItemTwoProduct, 'amount' => $orderItemTwoAmount, 'price' => $orderItemTwoPrice]);
-        $this->assertDatabaseHas('order_line_items', ['product_id' => $orderItemThreeProduct, 'amount' => $orderItemThreeAmount, 'price' => $orderItemThreePrice]);
-        $this->assertDatabaseHas('order_line_items', ['product_id' => $orderItemFourProduct, 'amount' => $orderItemFourAmount, 'price' => $orderItemFourPrice]);
     }
 
     public function testUserCanSeeHisOrder()

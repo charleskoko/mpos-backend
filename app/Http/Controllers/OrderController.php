@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Traits\ApiResponse;
 use Domain\Orders\Actions\CreateOrderAction;
 use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
-use http\Env\Request;
+use Domain\Orders\Events\NewOrderCreatedEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +49,7 @@ class OrderController extends Controller
         $orderLineItemsValidated = $request->validated();
         $orderLineItemsData = MakeOrderLineItemsData::fromRequest($orderLineItemsValidated['addOrderLineItem']);
         $order = ($this->createOrderAction)($orderLineItemsData);
+        NewOrderCreatedEvent::dispatch($order);
 
         return $this->success([OrderResource::make($order)],201);
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -33,10 +34,16 @@ Route::group(['prefix' => 'v1'], function () {
             Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
         });
 
-        Route::group(['prefix' => 'orders'], function (){
-            Route::get('/',[OrderController::class, 'index'])->name('orders.index');
-            Route::post('/',[OrderController::class, 'store'])->name('orders.store');
-            Route::delete('/{order},',[OrderController::class, 'destroy'])->name('orders.destroy');
+        Route::group(['prefix' => 'orders'], function () {
+            Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+            Route::post('/', [OrderController::class, 'store'])->name('orders.store');
+            Route::delete('/{order},', [OrderController::class, 'destroy'])->name('orders.destroy');
+        });
+
+        Route::group(['prefix' => 'invoices'], function () {
+            Route::get('/', [InvoiceController::class, 'index'])->name('invoices.index');
+            Route::get('/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+            Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
         });
     });
 });
