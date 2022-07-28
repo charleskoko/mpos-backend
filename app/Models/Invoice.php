@@ -14,11 +14,18 @@ class Invoice extends Model
 
     public $incrementing = false;
 
+    public const CASH_PAYMENT = 'CASH';
+    public const ORANGE_PAYMENT = 'ORANGE';
+    public const MTN_PAYMENT = 'MTN';
+    public const MOOV_PAYMENT = 'MOOV';
+    public const WAVE_PAYMENT = 'WAVE';
+    public const OTHER_PAYMENT = 'OTHER';
 
     protected $fillable = [
         'number',
         'user_id',
-        'order_id'
+        'order_id',
+        'payment'
     ];
 
     public function order(): BelongsTo
@@ -28,6 +35,6 @@ class Invoice extends Model
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }

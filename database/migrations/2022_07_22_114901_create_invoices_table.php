@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Invoice;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ return new class extends Migration {
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->bigInteger('number');
+            $table->string('payment')->default(Invoice::CASH_PAYMENT);
             $table->timestamps();
         });
     }

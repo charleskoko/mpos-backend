@@ -75,7 +75,7 @@ class ProductController extends Controller
         $productValidatedNewData = $request->validated();
         $product->update($productValidatedNewData);
 
-        return $this->success(['product' => $product->refresh()]);
+        return $this->success([$product->refresh()]);
     }
 
     /**
