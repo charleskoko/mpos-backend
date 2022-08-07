@@ -8,10 +8,10 @@ class DetermineInvoiceNumberAction
 {
     public function __invoke(): int
     {
-        $latestInvoice = Auth::user()->invoices()->orderBy('created_at', 'DESC')->first();
-        if ($latestInvoice == null) {
+        $invoices = Auth::user()->invoices();
+        if (!$invoices) {
             return 1;
         }
-        return $latestInvoice->number + 1;
+        return Auth::user()->invoices()->max('number') + 1;
     }
 }

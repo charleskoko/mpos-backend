@@ -18,7 +18,7 @@ class OrderResource extends JsonResource
         return [
             'id' => $order->id,
             'number' => $order->number,
-            'OrderLineItems' => OrderLineItemResource::collection($order->orderLineItems)
+            'order_line_items' => OrderLineItemResource::collection($order->orderLineItems)
         ];
     }
 }

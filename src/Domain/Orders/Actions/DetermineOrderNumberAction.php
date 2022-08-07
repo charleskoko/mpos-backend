@@ -8,10 +8,10 @@ class DetermineOrderNumberAction
 {
     public function __invoke(): int
     {
-        $latestOrder = Auth::user()->orders()->orderBy('created_at', 'DESC')->first();
-        if ($latestOrder == null) {
+        $orders = Auth::user()->orders();
+        if (!$orders) {
             return 1;
         }
-        return $latestOrder->number + 1;
+        return Auth::user()->orders()->max('number') + 1;
     }
 }

@@ -17,6 +17,7 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $user = User::where('email','=', 'test.user@gmail.com')->first();
+        $otherUser = User::where('email','=', 'other.user@gmail.com')->first();
 
         Product::create([
             'label' => 'product 1',
@@ -28,6 +29,17 @@ class ProductSeeder extends Seeder
             'label' => 'Product 2',
             'price' => 2000,
             'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'product 1',
+            'price' => 1000,
+            'user_id' => $otherUser->id
+        ]);
+
+        Product::create([
+            'label' => 'Product 2',
+            'price' => 2000,
+            'user_id' => $otherUser->id
         ]);
     }
 }

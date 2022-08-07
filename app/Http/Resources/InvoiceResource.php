@@ -20,6 +20,7 @@ class InvoiceResource extends JsonResource
             'id' => $invoice->id,
             'number' => $invoice->number,
             'order' => OrderResource::make($invoice->order),
+            'created_at' => $invoice->created_at
         ];
     }
 }

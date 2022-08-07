@@ -57,6 +57,6 @@ class User extends Authenticatable
 
     public function invoices(): HasMany
     {
-        return $this->hasMany(Invoice::class)->orderBy('created_at');
+        return $this->hasMany(Invoice::class)->whereDate('created_at', '=', now())->orderBy('created_at','DESC');
     }
 }
