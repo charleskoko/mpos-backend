@@ -2,13 +2,14 @@
 
 namespace Domain\Invoices\Actions;
 
+use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
 
 class DetermineInvoiceNumberAction
 {
     public function __invoke(): int
     {
-        $invoices = Auth::user()->invoices();
+        $invoices = Invoice::where('user_id','=',Auth::id());
         if (!$invoices) {
             return 1;
         }
