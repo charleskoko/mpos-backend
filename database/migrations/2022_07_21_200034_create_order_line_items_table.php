@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('amount');
             $table->uuid('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->cascadeOnDelete();
-            $table->uuid('product_id');
+            $table->uuid('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
             $table->timestamps();
         });
