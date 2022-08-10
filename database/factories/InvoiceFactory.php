@@ -24,7 +24,8 @@ class InvoiceFactory extends Factory
         return [
             'number' => $this->faker->randomDigit(),
             'user_id' => User::inRandomOrder()->first()->id,
-            'order_id' => Order::inRandomOrder()->first()->id
+            'order_id' => Order::inRandomOrder()->first()->id,
+            'created_at' => Now()
         ];
     }
 }
