@@ -13,7 +13,6 @@ class DetermineInvoiceNumberAction
         //if (!$invoices) {
         //    return 1;
         //}
-        //return Invoice::where('user_id','=',Auth::id())->max('number') + 1;
-        return 300;
+        return Invoice::where('user_id','=',Auth::id())->max('number') + 1;
     }
 }
