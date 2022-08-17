@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderLineItem;
 use App\Models\Product;
+use App\Models\UniqueNumber;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,14 +34,14 @@ class DetermineInvoiceNumberTest extends TestCase
         Sanctum::actingAs($this->user);
     }
 
-    private function createInvoices($user, $order)
+    private function createInvoices($user, $order,$number)
     {
         $count = 1;
-        while ($count < 10) {
+        while ($count < $number) {
             Invoice::factory()->create([
                 'user_id' => $this->user->id,
                 'order_id' => $this->order->id,
-                'number' => $count,
+                'number' => UniqueNumber::generateNumber('Invoice'),
                 'created_at' => Carbon::yesterday()
             ]);
             $count++;
@@ -50,6 +51,7 @@ class DetermineInvoiceNumberTest extends TestCase
 
     public function testFirstInvoiceNumber()
     {
+
         $newOrderData = [
             'addOrderLineItem' => [
                 [
@@ -61,14 +63,15 @@ class DetermineInvoiceNumberTest extends TestCase
         ];
         $response = $this->post(route('orders.store'), $newOrderData);
         $response->assertStatus(201);
-        $this->assertDatabaseHas('invoices', ['number' => 1]);
+        $number = 'INV'.date('Y').'-00001';
+        $this->assertDatabaseHas('invoices', ['number' => $number]);
     }
 
 
     public function testVerificationInvoiceNumberIncrementation()
     {
 
-        $this->createInvoices($this->user, $this->order);
+        $this->createInvoices($this->user, $this->order,10);
         $newOrderData = [
             'addOrderLineItem' => [
                 [
@@ -80,7 +83,32 @@ class DetermineInvoiceNumberTest extends TestCase
         ];
         $response = $this->post(route('orders.store'), $newOrderData);
         $response->assertStatus(201);
-        $this->assertDatabaseHas('invoices', ['number' => 10]);
+        $number = 'INV'.date('Y').'-00010';
+        $this->assertDatabaseHas('invoices', ['number' => $number]);
+
+    }
+
+
+    public function testVerificationInvoiceNumberOtherUser(){
+        $this->createInvoices($this->user, $this->order, 10);
+        $newUser = User::factory()->create();
+        $product = Product::factory()->create(
+            ['user_id' => $newUser->id]
+        );
+        Sanctum::actingAs($newUser);
+        $newOrderData = [
+            'addOrderLineItem' => [
+                [
+                    'product_id' => $product->id,
+                    'amount' => $this->faker->randomFloat(2, 100, 10000),
+                    'price' => $this->faker->randomDigit(),
+                ],
+            ]
+        ];
+        $response = $this->post(route('orders.store'), $newOrderData);
+        $response->assertStatus(201);
+        $number = 'INV'.date('Y').'-00001';
+        $this->assertDatabaseHas('invoices', ['number' => $number, 'user_id' => $newUser->id]);
 
     }
 

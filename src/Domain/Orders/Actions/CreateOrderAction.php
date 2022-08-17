@@ -3,6 +3,7 @@
 namespace Domain\Orders\Actions;
 
 use App\Models\Order;
+use App\Models\UniqueNumber;
 use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
 
 class CreateOrderAction
@@ -18,7 +19,7 @@ class CreateOrderAction
 
     public function __invoke(MakeOrderLineItemsData $makeOrderLineItemsData): Order
     {
-        $orderNumber = ($this->determineOrderNumberAction)();
+        $orderNumber = UniqueNumber::generateNumber('order');
         return ($this->saveOrderAction)($orderNumber, $makeOrderLineItemsData);
     }
 }

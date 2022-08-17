@@ -11,7 +11,7 @@ class SaveOrderAction
 {
 
 
-    public function __invoke(int $orderNumber, MakeOrderLineItemsData $makeOrderLineItemsData): Order
+    public function __invoke(string $orderNumber, MakeOrderLineItemsData $makeOrderLineItemsData): Order
     {
         $order = Order::create([
             'number' => $orderNumber,

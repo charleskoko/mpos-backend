@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Invoice;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateUniqueNumbersTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -13,14 +13,14 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('unique_numbers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('order_id');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('no action');
+            $table->string('prefix');
+            $table->year('year');
+            $table->integer('digits');
+            $table->string('current');
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('number');
-            $table->string('payment')->default(Invoice::CASH_PAYMENT);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('unique_numbers');
     }
-};
+}
