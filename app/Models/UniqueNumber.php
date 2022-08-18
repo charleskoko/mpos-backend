@@ -93,7 +93,7 @@ class UniqueNumber extends Model
             $number->save();
         }
 
-        $number->increment('current');
+        $number->update(['current' => $number->current +1]);
 
         $currentNumber = (string) $number->current;
         $zeroFilledNumber = str_pad($currentNumber, self::DEFAULT_DIGITS, '0', STR_PAD_LEFT);
