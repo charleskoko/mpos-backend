@@ -57,13 +57,13 @@ class OrderControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUserCanDeleteOrder()
-    {
-        $order = Order::inRandomOrder()->first();
-        $orderInfo = ['id' => $order->id, 'number' => $order->number, 'user_id' => $order->user_id];
-        $response = $this->delete(route('orders.destroy', $order->id));
-        $response->assertStatus(204);
-        $this->assertDatabaseMissing('orders', $orderInfo);
-        $this->assertDatabaseMissing('order_line_items', ['order_id' => $order->id]);
-    }
+  //  public function testUserCanDeleteOrder()
+  //  {
+  //      $order = Order::inRandomOrder()->first();
+  //      $orderInfo = ['id' => $order->id, 'number' => $order->number, 'user_id' => $order->user_id];
+  //      $response = $this->delete(route('orders.destroy', $order->id));
+  //      $response->assertStatus(204);
+  //      $this->assertDatabaseMissing('orders', $orderInfo);
+  //      $this->assertDatabaseMissing('order_line_items', ['order_id' => $order->id]);
+  //  }
 }
