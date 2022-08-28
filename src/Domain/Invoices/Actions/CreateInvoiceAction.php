@@ -8,16 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateInvoiceAction
 {
-    private DetermineInvoiceNumberAction $determineInvoiceNumberAction;
 
-    public function __construct(DetermineInvoiceNumberAction $determineInvoiceNumberAction)
-    {
-        $this->determineInvoiceNumberAction = $determineInvoiceNumberAction;
-    }
 
     public function __invoke(string $orderId): Invoice
     {
-        $invoiceNumber = UniqueNumber::generateNumber('Invoice');
+        $userUniqueNumber = Auth::user()->unique_number;
+        $invoiceNumber = UniqueNumber::generateNumber('invoice',$userUniqueNumber);
         return Invoice::create([
             'number' => $invoiceNumber,
             'user_id' => Auth::id(),

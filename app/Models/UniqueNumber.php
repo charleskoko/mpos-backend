@@ -74,7 +74,7 @@ class UniqueNumber extends Model
      *
      * @return string|null
      */
-    public static function generateNumber(string $model, int $format = 3): ?string
+    public static function generateNumber(string $model,string $userUniqueNumber, int $format = 3): ?string
     {
         $prefix = strtoupper(substr($model, 0, 3));
 
@@ -104,7 +104,7 @@ class UniqueNumber extends Model
             case 2:
                 return $year . '-' . $zeroFilledNumber;
             case 3:
-                return $prefix . $year . '-' . $zeroFilledNumber;
+                return $prefix.$userUniqueNumber . $year . '-' . $zeroFilledNumber;
         }
         return null;
     }

@@ -41,7 +41,7 @@ class DetermineInvoiceNumberTest extends TestCase
             Invoice::factory()->create([
                 'user_id' => $this->user->id,
                 'order_id' => $this->order->id,
-                'number' => UniqueNumber::generateNumber('Invoice'),
+                'number' => UniqueNumber::generateNumber('Invoice', $this->user->unique_number),
                 'created_at' => Carbon::yesterday()
             ]);
             $count++;
@@ -63,7 +63,7 @@ class DetermineInvoiceNumberTest extends TestCase
         ];
         $response = $this->post(route('orders.store'), $newOrderData);
         $response->assertStatus(201);
-        $number = 'INV'.date('Y').'-00001';
+        $number = 'INV'.$this->user->unique_number.date('Y').'-00001';
         $this->assertDatabaseHas('invoices', ['number' => $number]);
     }
 
@@ -83,7 +83,7 @@ class DetermineInvoiceNumberTest extends TestCase
         ];
         $response = $this->post(route('orders.store'), $newOrderData);
         $response->assertStatus(201);
-        $number = 'INV'.date('Y').'-00010';
+        $number = 'INV'.$this->user->unique_number.date('Y').'-00010';
         $this->assertDatabaseHas('invoices', ['number' => $number]);
 
     }
@@ -107,7 +107,7 @@ class DetermineInvoiceNumberTest extends TestCase
         ];
         $response = $this->post(route('orders.store'), $newOrderData);
         $response->assertStatus(201);
-        $number = 'INV'.date('Y').'-00001';
+        $number = 'INV'.$newUser->unique_number.date('Y').'-00001';
         $this->assertDatabaseHas('invoices', ['number' => $number, 'user_id' => $newUser->id]);
 
     }
