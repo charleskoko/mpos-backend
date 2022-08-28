@@ -19,10 +19,12 @@ class UserSeeder extends Seeder
         User::create(['email' => 'test.user@gmail.com',
             'name' => 'Test User',
             'unique_number' => (new DetermineUserUniqueNumber())(),
+            'mobile' => '0759584746',
             'password' => Hash::make('12345678')]);
 
         User::create(['email' => 'other.user@gmail.com',
             'name' => 'Other User',
+            'mobile' => '0759584746',
             'unique_number' => (new DetermineUserUniqueNumber())(),
             'password' => Hash::make('12345678')]);
     }

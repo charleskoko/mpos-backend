@@ -25,6 +25,7 @@ class AuthenticationControllerTest extends TestCase
         $newUserData = [
             'email' => $this->faker->email,
             'name' => 'new user',
+            'mobile' => '0759584746',
             'password' => '12345678',
             'password_confirmation' => '12345678',
         ];

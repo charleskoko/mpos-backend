@@ -21,6 +21,7 @@ class CreateUserAction
             [
                 'name' => $userData->name,
                 'email' => $userData->email,
+                'mobile' => $userData->mobile,
                 'unique_number' =>($this->determineUserUniqueNumber)(),
                 'password' => $userData->password
             ]

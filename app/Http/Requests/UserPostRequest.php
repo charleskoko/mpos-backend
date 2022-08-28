@@ -26,6 +26,7 @@ class UserPostRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'mobile' => 'required|regex:/^[0-9]{10}+$/',
             'password' => 'required|string|min:8|confirmed',
         ];
     }
