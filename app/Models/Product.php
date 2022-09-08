@@ -15,6 +15,7 @@ class Product extends Model
     protected $fillable = [
         'label',
         'price',
+        'is_deleted',
         'user_id'
     ];
 

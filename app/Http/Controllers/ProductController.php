@@ -31,7 +31,7 @@ class ProductController extends Controller
     {
         $authUser = Auth::user();
 
-        $authUserProducts = $authUser->products;
+        $authUserProducts = $authUser->products()->where('is_deleted', '=',false)->get();
 
         return $this->success([ProductResource::collection($authUserProducts)],);
     }
@@ -86,7 +86,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): JsonResponse
     {
-        $product->delete();
+
+        $product->update(['is_deleted'=>true]);
 
         return $this->success([], 204);
     }

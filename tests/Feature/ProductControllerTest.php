@@ -52,6 +52,7 @@ class ProductControllerTest extends TestCase
     {
         $response = $this->delete(route('products.destroy',$this->existentProduct->id));
         $response->assertStatus(204);
-        $this->assertDatabaseMissing('products',['label' => 'existent product', 'price' => 1000]);
+        $this->assertDatabaseHas('products',['label' => 'existent product', 'is_deleted' => true , 'price' => 1000]);
     }
+
 }
