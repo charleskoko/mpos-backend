@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -20,26 +19,70 @@ class ProductSeeder extends Seeder
         $otherUser = User::where('email','=', 'other.user@gmail.com')->first();
 
         Product::create([
-            'label' => 'product 1',
-            'price' => 1000,
+            'label' => 'SMIRNOFF ICE - 33cl',
+            'price' => 600,
             'user_id' => $user->id
         ]);
 
         Product::create([
-            'label' => 'Product 2',
-            'price' => 2000,
+            'label' => 'RHINO ENERGY MALT - 33cl',
+            'price' => 500,
             'user_id' => $user->id
         ]);
         Product::create([
-            'label' => 'product 1',
-            'price' => 1000,
-            'user_id' => $otherUser->id
+            'label' => 'IVOIRE - 60cl',
+            'price' => 600,
+            'user_id' => $user->id
         ]);
-
         Product::create([
-            'label' => 'Product 2',
-            'price' => 2000,
-            'user_id' => $otherUser->id
+            'label' => 'IVOIRE - 50cl',
+            'price' => 500,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'IVOIRE - 33cl',
+            'price' => 400,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'IVOIRE BLACK - 60cl',
+            'price' => 600,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'IVOIRE BLACK - 50cl',
+            'price' => 500,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'IVOIRE BLACK - 33cl',
+            'price' => 400,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'DESPERADOS - 33cl',
+            'price' => 600,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'DESPERADOS - 50cl',
+            'price' => 750,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'HEINEKEN - 50cl',
+            'price' => 700,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'HEINEKEN - 33cl',
+            'price' => 600,
+            'user_id' => $user->id
+        ]);
+        Product::create([
+            'label' => 'HEINEKEN (cannette) - 50cl',
+            'price' => 750,
+            'user_id' => $user->id
         ]);
     }
 }

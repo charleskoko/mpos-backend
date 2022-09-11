@@ -32,7 +32,7 @@ class OrderController extends Controller
 
         $authUser = Auth::user();
 
-        $authUserOrders = $authUser->orders;
+        $authUserOrders = $authUser->orders()->where('created_at', '=',now())->get();
 
         return $this->success([OrderResource::collection($authUserOrders)],);
     }
