@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -10,7 +11,7 @@ class OrderResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array|Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
@@ -18,7 +19,8 @@ class OrderResource extends JsonResource
         return [
             'id' => $order->id,
             'number' => $order->number,
-            'order_line_items' => OrderLineItemResource::collection($order->orderLineItems)
+            'order_line_items' => OrderLineItemResource::collection($order->orderLineItems),
+            'created_at'=> $order->created_at
         ];
     }
 }

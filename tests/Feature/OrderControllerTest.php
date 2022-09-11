@@ -28,7 +28,7 @@ class OrderControllerTest extends TestCase
         OrderLineItem::factory(10)->create();
     }
 
-    public function UserCanCreateOrder()
+    public function testUserCanCreateOrder()
     {
         Event::fake([NewOrderCreatedEvent::class]);
         $newOrderData = [
@@ -51,7 +51,7 @@ class OrderControllerTest extends TestCase
         $this->assertDatabaseHas('order_line_items', ['product_id' => $orderItemOneProduct, 'amount' => $orderItemOneAmount, 'price' => $orderItemOnePrice]);
     }
 
-    public function UserCanSeeHisOrder()
+    public function testUserCanSeeHisOrder()
     {
         $response = $this->get(route('orders.index'));
         $response->assertStatus(200);

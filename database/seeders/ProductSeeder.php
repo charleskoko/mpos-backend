@@ -20,86 +20,94 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'label' => 'SMIRNOFF ICE - 33cl',
-            'price' => 600,
+            'sale_price' => 600,
+            'purchase_price' => 600,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
 
         Product::create([
             'label' => 'RHINO ENERGY MALT - 33cl',
-            'price' => 500,
+            'sale_price' => 500,
+            'purchase_price' => 500,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'IVOIRE - 60cl',
-            'price' => 600,
+            'sale_price' => 600,
+            'purchase_price' => 600,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'IVOIRE - 50cl',
-            'price' => 500,
+            'sale_price' => 500,
+            'purchase_price' => 500,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'IVOIRE - 33cl',
-            'price' => 400,
+            'sale_price' => 400,
+            'purchase_price' => 400,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'IVOIRE BLACK - 60cl',
-            'price' => 600,
+            'sale_price' => 600,
+            'purchase_price' => 600,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'IVOIRE BLACK - 50cl',
-            'price' => 500,
+            'sale_price' => 500,
+            'purchase_price' => 500,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'IVOIRE BLACK - 33cl',
-            'price' => 400,
+            'sale_price' => 600,
+            'stock' => 100,
+            'purchase_price' => 600,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'DESPERADOS - 33cl',
-            'price' => 600,
-            'label' => 'product 1',
-            'sale_price' => 1000,
-            'purchase_price' => 500,
-            'stock' => 24,
+            'sale_price' => 600,
+            'purchase_price' => 600,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
-            'label' => 'Product 2',
-            'sale_price' => 2000,
-            'purchase_price' => 500,
-            'stock' => 24,
             'label' => 'DESPERADOS - 50cl',
-            'price' => 750,
+            'sale_price' => 750,
+            'purchase_price' => 750,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
-            'label' => 'product 1',
-            'sale_price' => 1000,
-            'purchase_price' => 500,
-            'stock' => 24,
-            'user_id' => $otherUser->id
             'label' => 'HEINEKEN - 50cl',
-            'price' => 700,
+            'sale_price' => 700,
+            'purchase_price' => 700,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
-            'label' => 'Product 2',
-            'sale_price' => 2000,
-            'purchase_price' => 500,
-            'stock' => 24,
-            'user_id' => $otherUser->id
             'label' => 'HEINEKEN - 33cl',
-            'price' => 600,
+            'sale_price' => 600,
+            'purchase_price' => 600,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
         Product::create([
             'label' => 'HEINEKEN (cannette) - 50cl',
-            'price' => 750,
+            'sale_price' => 750,
+            'purchase_price' => 600,
+            'stock' => 100,
             'user_id' => $user->id
         ]);
     }

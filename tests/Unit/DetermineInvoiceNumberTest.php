@@ -49,7 +49,7 @@ class DetermineInvoiceNumberTest extends TestCase
     }
 
 
-    public function FirstInvoiceNumber()
+    public function testFirstInvoiceNumber()
     {
 
         $newOrderData = [
@@ -68,7 +68,7 @@ class DetermineInvoiceNumberTest extends TestCase
     }
 
 
-    public function VerificationInvoiceNumberIncrementation()
+    public function testVerificationInvoiceNumberIncrementation()
     {
 
         $this->createInvoices($this->user, $this->order,10);
@@ -89,7 +89,7 @@ class DetermineInvoiceNumberTest extends TestCase
     }
 
 
-    public function VerificationInvoiceNumberOtherUser(){
+    public function testVerificationInvoiceNumberOtherUser(){
         $this->createInvoices($this->user, $this->order, 10);
         $newUser = User::factory()->create();
         $product = Product::factory()->create(

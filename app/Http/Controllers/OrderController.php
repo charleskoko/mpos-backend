@@ -6,12 +6,14 @@ use App\Http\Requests\OrderPostRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Traits\ApiResponse;
+use Carbon\Carbon;
 use Domain\Orders\Actions\CreateOrderAction;
 use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
 use Domain\Orders\Events\NewOrderCreatedEvent;
 use Domain\Products\Actions\UpdateProductStockAction;
 use Domain\Products\Events\UpdateProductStockEvent;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -31,14 +33,18 @@ class OrderController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-
+        $date = $request->input('date');
         $authUser = Auth::user();
+        if ($date == null) {
+            $authUserOrders = $authUser->orders()->whereDate('created_at', '=', Carbon::today()->toDateString())->get();
+            return $this->success([OrderResource::collection($authUserOrders)],);
 
-        $authUserOrders = $authUser->orders()->where('created_at', '=',now())->get();
-
+        }
+        $authUserOrders = $authUser->orders()->whereDate('created_at', '=', $date)->get();
         return $this->success([OrderResource::collection($authUserOrders)],);
+
     }
 
     /**

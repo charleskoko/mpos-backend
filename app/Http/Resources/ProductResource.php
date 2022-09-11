@@ -21,7 +21,10 @@ class ProductResource extends JsonResource
         return [
             'id' => $product->id,
             'label' => $product->label,
-            'price' => $product->price,
+            'purchase_price' => $product->purchase_price,
+            'sale_price' => $product->sale_price,
+            'is_deleted' => $product->is_deleted,
+            'stock' => $product->stock,
             'owner' => UserResource::make($product->owner),
             'created_at' => $product->creted_at,
             'updated_at' => $product->updated_at
