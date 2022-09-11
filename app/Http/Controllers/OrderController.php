@@ -9,6 +9,8 @@ use App\Traits\ApiResponse;
 use Domain\Orders\Actions\CreateOrderAction;
 use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
 use Domain\Orders\Events\NewOrderCreatedEvent;
+use Domain\Products\Actions\UpdateProductStockAction;
+use Domain\Products\Events\UpdateProductStockEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +18,12 @@ class OrderController extends Controller
 {
     use ApiResponse;
     private CreateOrderAction $createOrderAction;
+    private UpdateProductStockAction $updateProductStockAction;
 
-    public function __construct(CreateOrderAction $createOrderAction)
+    public function __construct(CreateOrderAction $createOrderAction, UpdateProductStockAction $updateProductStockAction)
     {
         $this->createOrderAction = $createOrderAction;
+        $this->updateProductStockAction = $updateProductStockAction;
     }
 
     /**
@@ -32,7 +36,7 @@ class OrderController extends Controller
 
         $authUser = Auth::user();
 
-        $authUserOrders = $authUser->orders;
+        $authUserOrders = $authUser->orders()->where('created_at', '=',now())->get();
 
         return $this->success([OrderResource::collection($authUserOrders)],);
     }
@@ -50,6 +54,7 @@ class OrderController extends Controller
         $orderLineItemsData = MakeOrderLineItemsData::fromRequest($orderLineItemsValidated['addOrderLineItem']);
         $order = ($this->createOrderAction)($orderLineItemsData);
         NewOrderCreatedEvent::dispatch($order);
+        UpdateProductStockEvent::dispatch($order);
 
         return $this->success([OrderResource::make($order)],201);
     }

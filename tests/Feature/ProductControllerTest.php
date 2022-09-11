@@ -19,7 +19,7 @@ class ProductControllerTest extends TestCase
     {
         parent::setUp();
         $this->authenticatedUser = User::factory()->create();
-        $this->existentProduct = Product::factory()->create(['label' => 'existent product', 'price' => 1000, 'user_id' => $this->authenticatedUser]);
+        $this->existentProduct = Product::factory()->create(['label' => 'existent product','purchase_price' => '500', 'sale_price' => 1000, 'user_id' => $this->authenticatedUser]);
         Sanctum::actingAs($this->authenticatedUser);
     }
 
@@ -33,7 +33,12 @@ class ProductControllerTest extends TestCase
 
     public function testUserCanStoreNewProduct()
     {
-        $productData = ['label' => 'new product', 'price' => 1000];
+        $productData = [
+            'label' => 'new product',
+            'sale_price' => 1000,
+            'purchase_price' => 500,
+            'stock' => 24,
+        ];
         $response = $this->post(route('products.store'), $productData);
         $response->assertStatus(201);
         $this->assertDatabaseHas('products', $productData);
@@ -41,18 +46,23 @@ class ProductControllerTest extends TestCase
 
     public function testUserCanUpdateProductInfo()
     {
-        $newExistentProductInfo = ['label' => 'update label', 'price' => 2500];
-        $response = $this->patch(route('products.update',$this->existentProduct->id),$newExistentProductInfo);
+        $newExistentProductInfo = [
+            'label' => 'update label',
+            'sale_price' => 1000,
+            'purchase_price' => 500,
+            'stock' => 24,
+        ];
+        $response = $this->patch(route('products.update', $this->existentProduct->id), $newExistentProductInfo);
         $response->assertStatus(200);
         $this->assertDatabaseHas('products', $newExistentProductInfo);
-        $this->assertDatabaseMissing('products',['label' => 'existent product', 'price' => 1000]);
+        $this->assertDatabaseMissing('products', ['label' => 'existent product', 'sale_price' => 1000]);
     }
 
     public function testUserCanDeleteProduct()
     {
         $response = $this->delete(route('products.destroy',$this->existentProduct->id));
         $response->assertStatus(204);
-        $this->assertDatabaseHas('products',['label' => 'existent product', 'is_deleted' => true , 'price' => 1000]);
+        $this->assertDatabaseHas('products',['label' => 'existent product', 'is_deleted' => 1 , 'sale_price' => 1000]);
     }
 
 }

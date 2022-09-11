@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Domain\Orders\Events\NewOrderCreatedEvent;
 use Domain\Orders\Listeners\NewOrderCreatedListener;
+use Domain\Products\Events\UpdateProductStockEvent;
+use Domain\Products\Listeners\UpdateProductStockListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -21,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewOrderCreatedEvent::class => [
             NewOrderCreatedListener::class,
+        ],
+        UpdateProductStockEvent::class => [
+            UpdateProductStockListener::class
         ]
     ];
 
