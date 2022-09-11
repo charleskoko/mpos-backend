@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('label')->nullable();
-            $table->float('price')->nullable();
+            $table->float('sale_price')->nullable();
+            $table->float('purchase_price')->nullable();
+            $table->float('stock')->nullable();
             $table->boolean('is_deleted')->default(false);
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();

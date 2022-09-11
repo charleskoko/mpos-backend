@@ -24,8 +24,10 @@ class ProductPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'label' => 'nullable|string',
-            'price' => 'nullable|numeric'
+            'label' => 'required|string',
+            'sale_price' => 'nullable|numeric',
+            'purchase_price' => 'nullable|numeric',
+            'stock' => 'nullable|numeric'
         ];
     }
 }

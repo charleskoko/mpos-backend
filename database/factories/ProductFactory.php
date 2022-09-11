@@ -21,7 +21,9 @@ class ProductFactory extends Factory
     {
         return [
             'label' => $this->faker->company,
-            'price' => $this->faker->randomFloat('2','1000','10000'),
+            'sale_price' => $salePrice = $this->faker->randomFloat('2','1000','10000'),
+            'purchase_price' => $this->faker->randomFloat('2','500',$salePrice),
+            'stock' => $this->faker->randomFloat('2','24','50'),
             'user_id' => User::inRandomOrder()->first()->id
         ];
     }

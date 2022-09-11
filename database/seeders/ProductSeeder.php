@@ -62,19 +62,37 @@ class ProductSeeder extends Seeder
         Product::create([
             'label' => 'DESPERADOS - 33cl',
             'price' => 600,
+            'label' => 'product 1',
+            'sale_price' => 1000,
+            'purchase_price' => 500,
+            'stock' => 24,
             'user_id' => $user->id
         ]);
         Product::create([
+            'label' => 'Product 2',
+            'sale_price' => 2000,
+            'purchase_price' => 500,
+            'stock' => 24,
             'label' => 'DESPERADOS - 50cl',
             'price' => 750,
             'user_id' => $user->id
         ]);
         Product::create([
+            'label' => 'product 1',
+            'sale_price' => 1000,
+            'purchase_price' => 500,
+            'stock' => 24,
+            'user_id' => $otherUser->id
             'label' => 'HEINEKEN - 50cl',
             'price' => 700,
             'user_id' => $user->id
         ]);
         Product::create([
+            'label' => 'Product 2',
+            'sale_price' => 2000,
+            'purchase_price' => 500,
+            'stock' => 24,
+            'user_id' => $otherUser->id
             'label' => 'HEINEKEN - 33cl',
             'price' => 600,
             'user_id' => $user->id
