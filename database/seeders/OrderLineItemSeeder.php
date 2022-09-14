@@ -12,7 +12,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 class OrderLineItemSeeder extends Seeder
 {
-    use WithFaker;
 
     /**
      * Run the database seeds.
