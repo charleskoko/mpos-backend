@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Order;
+use App\Models\UniqueNumber;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Laravel\Sanctum\Sanctum;
 
 class OrderSeeder extends Seeder
 {
@@ -17,8 +19,14 @@ class OrderSeeder extends Seeder
     {
         $user = User::where('email', '=', 'test.user@gmail.com')->first();
 
-        Order::factory(100)->create([
-            'user_id' => $user->id
-        ]);
+        for ($count = 0; $count <= 100; $count++) {
+            Sanctum::actingAs($user);
+            $orderInfo = [
+                'number' => UniqueNumber::generateNumber('Order', $user->unique_number),
+                'user_id' => $user->id
+            ];
+            Order::create($orderInfo
+            );
+        }
     }
 }

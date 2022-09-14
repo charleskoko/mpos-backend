@@ -26,10 +26,10 @@ class OrderLineItemSeeder extends Seeder
         $productIdArray = $user->products->pluck('id');
         $orderIdArray= $user->orders->pluck('id');
 
-        foreach ($orderIdArray as $key => $order){
+        foreach ($orderIdArray as $key => $orderId){
             OrderLineItem::factory()->create([
                 'product_id' => $productIdArray[random_int(0,count($productIdArray) -1)],
-                'order_id' => $order
+                'order_id' => $orderId
             ]);
         }
     }
