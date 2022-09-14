@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Order;
 use App\Models\OrderLineItem;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Testing\WithFaker;
 
 class OrderLineItemSeeder extends Seeder
 {
@@ -26,9 +23,13 @@ class OrderLineItemSeeder extends Seeder
         $orderIdArray= $user->orders->pluck('id');
 
         foreach ($orderIdArray as $key => $orderId){
-            OrderLineItem::factory()->create([
-                'product_id' => $productIdArray[random_int(0,count($productIdArray) -1)],
-                'order_id' => $orderId
+            $productId = $productIdArray[random_int(0, count($productIdArray) - 1)];
+            $product = Product::where('id', '=', $productId)->first();
+            OrderLineItem::create([
+                'product_id' => $productId,
+                'order_id' => $orderId,
+                'price' => $product->sale_price,
+                'amount' => random_int(2, 5)
             ]);
         }
     }
