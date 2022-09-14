@@ -74,7 +74,7 @@ class UniqueNumber extends Model
      *
      * @return string|null
      */
-    public static function generateNumber(string $model,string $userUniqueNumber, int $format = 3): ?string
+    public static function generateNumber(string $model,string $userUniqueNumber,string $authUserId, int $format = 3): ?string
     {
         $prefix = strtoupper(substr($model, 0, 3));
 
@@ -86,7 +86,7 @@ class UniqueNumber extends Model
             $number = new self([
                 'prefix' => $prefix,
                 'year' => $year,
-                'user_id' => Auth::id(),
+                'user_id' => $authUserId,
                 'digits' => self::DEFAULT_DIGITS,
                 'current' => self::DEFAULT_VALUE,
             ]);

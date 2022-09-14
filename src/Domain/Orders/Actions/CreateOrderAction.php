@@ -19,7 +19,7 @@ class CreateOrderAction
     public function __invoke(MakeOrderLineItemsData $makeOrderLineItemsData): Order
     {
         $userUniqueNumber = Auth::user()->unique_number;
-        $orderNumber = UniqueNumber::generateNumber('order',$userUniqueNumber);
+        $orderNumber = UniqueNumber::generateNumber('order',$userUniqueNumber, Auth::id());
         return ($this->saveOrderAction)($orderNumber, $makeOrderLineItemsData);
     }
 }

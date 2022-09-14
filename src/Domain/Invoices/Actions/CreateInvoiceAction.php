@@ -13,7 +13,7 @@ class CreateInvoiceAction
     public function __invoke(string $orderId): Invoice
     {
         $userUniqueNumber = Auth::user()->unique_number;
-        $invoiceNumber = UniqueNumber::generateNumber('invoice',$userUniqueNumber);
+        $invoiceNumber = UniqueNumber::generateNumber('invoice',$userUniqueNumber, Auth::id());
         return Invoice::create([
             'number' => $invoiceNumber,
             'user_id' => Auth::id(),

@@ -20,9 +20,8 @@ class OrderSeeder extends Seeder
         $user = User::where('email', '=', 'test.user@gmail.com')->first();
 
         for ($count = 0; $count <= 100; $count++) {
-            Sanctum::actingAs($user);
             $orderInfo = [
-                'number' => UniqueNumber::generateNumber('Order', $user->unique_number),
+                'number' => UniqueNumber::generateNumber('Order', $user->unique_number,$user->id),
                 'user_id' => $user->id
             ];
             Order::create($orderInfo
