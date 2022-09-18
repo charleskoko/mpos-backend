@@ -42,7 +42,7 @@ class OrderController extends Controller
             return $this->success([OrderResource::collection($authUserOrders)],);
 
         }
-        $authUserOrders = $authUser->orders()->whereDate('created_at', '=', $date)->get();
+        $authUserOrders = $authUser->orders()->whereDay('created_at', '=', Carbon::create($date))->get();
         return $this->success([OrderResource::collection($authUserOrders)],);
 
     }
