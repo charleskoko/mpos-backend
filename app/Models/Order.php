@@ -34,4 +34,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderLineItem::class);
     }
+
+    public function invoice() : BelongsTo
+    {
+        return $this->belongsTo(Invoice::class);
+    }
 }
