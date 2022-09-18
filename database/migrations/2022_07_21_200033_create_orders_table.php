@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('number');
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->uuid('invoice_id')->nullable();
+            $table->foreign('invoice_id')->references('id')->on('invoices')->cascadeOnDelete();
             $table->timestamps();
         });
     }

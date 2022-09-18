@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\UniqueNumber;
 use App\Models\User;
@@ -21,14 +22,21 @@ class OrderSeeder extends Seeder
     public function run()
     {
         $user = User::where('email', '=', 'test.user@gmail.com')->first();
+
         for ($count = 0; $count <= 100; $count++) {
             $orderInfo = [
                 'number' => UniqueNumber::generateNumber('Order', $user->unique_number,$user->id),
                 'user_id' => $user->id,
                 'created_at' => Carbon::now()->subDays(random_int(0,10))->format('Y-m-d H:i:s'),
             ];
-            Order::create($orderInfo
-            );
+            $order = Order::create($orderInfo);
+            $invoice = Invoice::create([
+                'number' => UniqueNumber::generateNumber('Invoice', $user->unique_number,$user->id),
+                'user_id' => $user->id,
+                'order_id'=> $order->id,
+                'payment'=> Invoice::CASH_PAYMENT,
+            ]);
+            $order->update(['invoice_id' => $invoice->id]);
         }
     }
 }

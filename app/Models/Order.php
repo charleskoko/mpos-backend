@@ -22,7 +22,8 @@ class Order extends Model
      */
     protected $fillable = [
         'number',
-        'user_id'
+        'user_id',
+        'invoice_id'
     ];
 
     public function owner(): BelongsTo

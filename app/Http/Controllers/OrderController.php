@@ -7,11 +7,10 @@ use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
+use Domain\Invoices\Actions\CreateInvoiceAction;
 use Domain\Orders\Actions\CreateOrderAction;
 use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
-use Domain\Orders\Events\NewOrderCreatedEvent;
 use Domain\Products\Actions\UpdateProductStockAction;
-use Domain\Products\Events\UpdateProductStockEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +20,13 @@ class OrderController extends Controller
     use ApiResponse;
     private CreateOrderAction $createOrderAction;
     private UpdateProductStockAction $updateProductStockAction;
+    private CreateInvoiceAction  $createInvoiceAction;
 
-    public function __construct(CreateOrderAction $createOrderAction, UpdateProductStockAction $updateProductStockAction)
+    public function __construct(CreateOrderAction $createOrderAction, UpdateProductStockAction $updateProductStockAction, CreateInvoiceAction $createInvoiceAction)
     {
         $this->createOrderAction = $createOrderAction;
         $this->updateProductStockAction = $updateProductStockAction;
+        $this->createInvoiceAction = $createInvoiceAction;
     }
 
     /**
@@ -59,9 +60,9 @@ class OrderController extends Controller
         $orderLineItemsValidated = $request->validated();
         $orderLineItemsData = MakeOrderLineItemsData::fromRequest($orderLineItemsValidated['addOrderLineItem']);
         $order = ($this->createOrderAction)($orderLineItemsData);
-        NewOrderCreatedEvent::dispatch($order);
-        UpdateProductStockEvent::dispatch($order);
+        $invoice = ($this->createInvoiceAction)($order->id);
 
+        $order->update(['invoice_id' => $invoice->id]);
         return $this->success([OrderResource::make($order)],201);
     }
 

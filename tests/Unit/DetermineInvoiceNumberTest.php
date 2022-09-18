@@ -41,7 +41,7 @@ class DetermineInvoiceNumberTest extends TestCase
             Invoice::factory()->create([
                 'user_id' => $this->user->id,
                 'order_id' => $this->order->id,
-                'number' => UniqueNumber::generateNumber('Invoice', $this->user->unique_number),
+                'number' => UniqueNumber::generateNumber('Invoice', $this->user->unique_number,$this->user->id,),
                 'created_at' => Carbon::yesterday()
             ]);
             $count++;

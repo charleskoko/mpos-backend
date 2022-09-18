@@ -30,7 +30,6 @@ class OrderControllerTest extends TestCase
 
     public function testUserCanCreateOrder()
     {
-        Event::fake([NewOrderCreatedEvent::class]);
         $newOrderData = [
             'addOrderLineItem' => [
                 [
@@ -41,12 +40,6 @@ class OrderControllerTest extends TestCase
             ]
         ];
         $response = $this->post(route('orders.store'), $newOrderData);
-        Event::assertDispatched(NewOrderCreatedEvent::class);
-        Event::assertListening(
-            NewOrderCreatedEvent::class,
-            NewOrderCreatedListener::class
-        );
-        $order = Order::latest()->first();
         $response->assertStatus(201);
         $this->assertDatabaseHas('order_line_items', ['product_id' => $orderItemOneProduct, 'amount' => $orderItemOneAmount, 'price' => $orderItemOnePrice]);
     }
