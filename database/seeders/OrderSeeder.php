@@ -25,7 +25,7 @@ class OrderSeeder extends Seeder
             $orderInfo = [
                 'number' => UniqueNumber::generateNumber('Order', $user->unique_number,$user->id),
                 'user_id' => $user->id,
-                'created_at' => Carbon::now()->addDays(random_int(0,10))->format('Y-m-d H:i:s'),
+                'created_at' => Carbon::now()->subDays(random_int(0,10))->format('Y-m-d H:i:s'),
             ];
             Order::create($orderInfo
             );
