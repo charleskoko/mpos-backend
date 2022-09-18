@@ -20,7 +20,8 @@ class OrderResource extends JsonResource
             'id' => $order->id,
             'number' => $order->number,
             'order_line_items' => OrderLineItemResource::collection($order->orderLineItems),
-            'created_at'=> $order->created_at
+            'created_at'=> $order->created_at,
+            'invoice' => InvoiceResource::make($order->invoice)
         ];
     }
 }
