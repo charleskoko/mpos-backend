@@ -16,7 +16,6 @@ class CreateProductAction
                 'sale_price' => $productData->salePrice,
                 'user_id' => $productData->userId,
                 'purchase_price' => $productData->purchasePrice,
-                'stock' => $productData->stock,
             ]
         );
 
