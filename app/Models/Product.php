@@ -17,7 +17,6 @@ class Product extends Model
         'sale_price',
         'is_deleted',
         'purchase_price',
-        'stock',
         'user_id'
     ];
 

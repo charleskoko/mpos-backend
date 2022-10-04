@@ -27,7 +27,7 @@ class ProductPostRequest extends FormRequest
             'label' => 'required|string',
             'sale_price' => 'nullable|numeric',
             'purchase_price' => 'nullable|numeric',
-            'stock' => 'nullable|numeric'
+            //'stock' => 'nullable|numeric'
         ];
     }
 }
