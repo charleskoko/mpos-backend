@@ -19,7 +19,7 @@ class ProductData
         $dto->label = $validatedProductData['label'];
         $dto->salePrice = $validatedProductData['sale_price'];
         $dto->purchasePrice = $validatedProductData['purchase_price'];
-        $dto->stock = $validatedProductData['stock'];
+        //$dto->stock = $validatedProductData['stock'];
         $dto->userId = Auth::id();
 
         return $dto;
