@@ -52,8 +52,8 @@
             <div class="half-content">
                 <div class="contents">
 
-                    <h2 class="head-title">A better way to connect with your customers</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
+                    <h2 class="head-title">Une meilleure façon de communiquer avec vos clients</h2>
+                    <p>Charly vous rapproche de vos clients et ce en un clic</p>
                     <div class="header-button">
                         <a href="#" rel="nofollow" target="_blank" class=""><img src="images/ios.svg" alt=""></a>
                         <a href="#" rel="nofollow" target="_blank" class=""><img src="images/and.svg" alt=""></a>
@@ -72,32 +72,32 @@
 <section id="features" class="page">
     <div class="container">
         <div class="headiner-text">
-            <label class="sbheading">Features</label>
-            <h2 class="heading">That’s not all. Discover even more possibilities.</h2>
+            <label class="sbheading">Fonctionnalités</label>
+            <h2 class="heading">Ce n'est pas tout. Decouvrez d'autres fonctionnalités</h2>
         </div>
         <div class="row-inner">
 
             <div class="col-3">
                 <div class="col-3-inner">
                     <img src="images/icon1.svg" class="inner-icon">
-                    <h3 class="f-heading">Full Mangement</h3>
-                    <p class="para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
+                    <h3 class="f-heading">Gestion Complete</h3>
+                    <p class="para">Ayez une gestion optimal de votre caisse.</p>
 
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-3-inner">
                     <img src="images/icon2.svg" class="inner-icon">
-                    <h3 class="f-heading">No Extra Fee</h3>
-                    <p class="para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
+                    <h3 class="f-heading">Pas de Frais Suplementaire</h3>
+                    <p class="para">Accomplissez vos tâches tout en étant exonerer de tout frais.</p>
 
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-3-inner">
                     <img src="images/icon3.svg" class="inner-icon">
-                    <h3 class="f-heading">Super Secure</h3>
-                    <p class="para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
+                    <h3 class="f-heading">Super Sécurisé</h3>
+                    <p class="para">Examiné minutieusement toutes vos actions.</p>
 
                 </div>
             </div>
@@ -109,15 +109,15 @@
                 <div class="col-full">
                     <img src="images/icon-f1.svg" class="fe-icon">
                     <div class="right-text-cont">
-                        <h3 class="f-heading">Heading</h3>
-                        <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum porta magna at blandit a.</p>
+                        <h3 class="f-heading">Finis les tracasseries</h3>
+                        <p class="para">Toutes vos transactions enregistrées avec aisance.</p>
                     </div>
                 </div>
                 <div class="col-full">
                     <img src="images/icon-f2.svg" class="fe-icon">
                     <div class="right-text-cont">
-                        <h3 class="f-heading">Heading</h3>
-                        <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum porta magna at blandit a.</p>
+                        <h3 class="f-heading">Gagner en temps</h3>
+                        <p class="para">Données enregistrées et combinées en un clic.</p>
                     </div>
                 </div>
                 <div class="col-full">
