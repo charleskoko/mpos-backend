@@ -14,7 +14,6 @@ class CodeCheckController extends Controller
 
     public function codeChecking(CodeCheckingRequest $request)
     {
-        dd('dgdfg');
         $validatedRequest = $request->validated();
         $passwordReset = ResetCodePassword::firstWhere('code', $validatedRequest['code']);
         if ($passwordReset->created_at > now()->addHour()) {

@@ -21,6 +21,6 @@ class ForgotPasswordController extends Controller
         $codeData = ResetCodePassword::create($data);
         Mail::to($validatedrequest['email'])->send(new SendCodeResetPassword($codeData->code));
 
-        return response(['message' => trans('passwords.sent')], 200);
+        return $this->success(['message'=> 'password.reset']);
     }
 }
