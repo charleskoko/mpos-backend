@@ -21,7 +21,7 @@ class CodeCheckController extends Controller
             return response(['message' => trans('passwords.code_is_expire')], 422);
         }
         $user = User::firstWhere('email', $passwordReset->email);
-        $user->update(['password' => Hash::make($request)]);
+        $user->update(['password' => Hash::make($request['password'])]);
         ResetCodePassword::firstWhere('code', $validatedRequest['code'])->delete();
 
         return response(['message' => 'password has been successfully reset'], 200);
