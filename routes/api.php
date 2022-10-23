@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CodeCheckController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::post('register', [AuthenticationController::class, 'register'])->name('user.register');
     Route::post('login', [AuthenticationController::class, 'login'])->name('user.login');
+    Route::post('password/email', [ForgotPasswordController::class,'generateResetCode'])->name('password.email');
+    Route::post('password/code/check', [CodeCheckController::class,'codeChecking'])->name('code.check');
+    Route::post('password/reset', [ResetPasswordController::class])->name('password.reset');
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('logout', [AuthenticationController::class, 'logout'])->name('user.logout');
 

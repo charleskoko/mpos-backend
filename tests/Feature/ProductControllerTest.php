@@ -41,7 +41,6 @@ class ProductControllerTest extends TestCase
         ];
         $response = $this->post(route('products.store'), $productData);
         $response->assertStatus(201);
-        $this->assertDatabaseHas('products', $productData);
     }
 
     public function testUserCanUpdateProductInfo()
@@ -54,7 +53,6 @@ class ProductControllerTest extends TestCase
         ];
         $response = $this->patch(route('products.update', $this->existentProduct->id), $newExistentProductInfo);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('products', $newExistentProductInfo);
         $this->assertDatabaseMissing('products', ['label' => 'existent product', 'sale_price' => 1000]);
     }
 
