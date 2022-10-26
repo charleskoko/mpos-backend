@@ -48,6 +48,6 @@ class InvoiceController extends Controller
     {
         $invoice->delete();
 
-        return $this->success([], 204);
+        return $this->success([], 204,);
     }
 }

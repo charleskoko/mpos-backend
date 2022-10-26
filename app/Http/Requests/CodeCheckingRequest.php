@@ -25,7 +25,20 @@ class CodeCheckingRequest extends FormRequest
     {
         return [
             'code' => 'required|string|exists:reset_code_passwords',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:8|confirmed',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'code.required' => 'code_required',
+            'code.string' => 'code_string',
+            'code.exists' => 'code_exists',
+            'password.exists' => 'password_required',
+            'password.string' => 'password_string',
+            'password.min' => 'password_min',
+            'password.confirmed' => 'password_confirmed',
         ];
     }
 }

@@ -24,8 +24,20 @@ class UserLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|email|max:255',
             'password' => 'required|string|min:8',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'email_required',
+            'email.email' => 'email_email',
+            'email.max' => 'email_max',
+            'password.string' => 'password_string',
+            'password.min' => 'password_min',
+            'password.required' => 'password_required',
         ];
     }
 }

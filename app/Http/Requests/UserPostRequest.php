@@ -25,9 +25,28 @@ class UserPostRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'mobile' => 'required|regex:/^[0-9]{10}+$/',
             'password' => 'required|string|min:8|confirmed',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'name_required',
+            'name.string' => 'name_string',
+            'name.max' => 'name_max',
+            'email.required' => 'email_required',
+            'email.email' => 'email_email',
+            'email.max' => 'email_max',
+            'email.unique' => 'email_unique',
+            'mobile.required' => 'mobile_required',
+            'mobile_regex' => 'mobile_regex',
+            'password.string' => 'password_string',
+            'password.min' => 'password_min',
+            'password.required' => 'password_required',
+            'password.confirmed' => 'password_confirmed',
         ];
     }
 }
