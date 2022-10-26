@@ -22,6 +22,7 @@
                 <h3 style="color:#262262;font-size:22px;margin-bottom:0;">Reinitialisez votre mot de passe</h3>
                 <p style="color:#64607D;font-size:14px;">S'il vous plaît, utilisez ce code pour confirmer la rénitialisation du mot de passe</p>
                 <h2 style="color:#262262;font-size:52px;margin-bottom:0;letter-spacing:10px;">{{$code}}</h2>
+                <p style="color:#64607D;font-size:14px;">Ce code est valable pendant une heure.</p>
                 <p style="color:#64607D;font-size:14px;">Si vous n'avez pas demander de rénitialisation, veuillez ignorer cet e-mail ou <a href="#">se désinscrire</a>.</p>
             </td>
         </tr>
