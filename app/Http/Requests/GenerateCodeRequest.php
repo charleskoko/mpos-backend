@@ -27,4 +27,13 @@ class GenerateCodeRequest extends FormRequest
             'email' => 'required|email|exists:users',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'email_required',
+            'email.email' => 'email_email',
+            'email.exists' => 'email_exists',
+        ];
+    }
 }

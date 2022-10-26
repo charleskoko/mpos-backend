@@ -34,9 +34,9 @@ class UserPostRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'register_name_required',
+            'name.required' => 'name_required',
             'name.string' => 'name_string',
-            'name.max' => 'max',
+            'name.max' => 'name_max',
             'email.required' => 'email_required',
             'email.email' => 'email_email',
             'email.max' => 'email_max',

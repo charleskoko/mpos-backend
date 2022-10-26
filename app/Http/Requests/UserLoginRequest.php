@@ -32,12 +32,12 @@ class UserLoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'login_email_required',
-            'email.email' => 'login_email_email',
-            'email.max' => 'login_email_max',
-            'password.string' => 'login_password_string',
-            'password.min' => 'login_password_min',
-            'password.required' => 'login_password_required',
+            'email.required' => 'email_required',
+            'email.email' => 'email_email',
+            'email.max' => 'email_max',
+            'password.string' => 'password_string',
+            'password.min' => 'password_min',
+            'password.required' => 'password_required',
         ];
     }
 }
