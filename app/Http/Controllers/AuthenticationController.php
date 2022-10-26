@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
         $userCredentials = $request->validated();
 
         if ($this->isUserCredentialFalse($userCredentials)) {
-            return $this->error(401, null, 'Invalid login details');
+            return $this->error(401, null, 'invalid_credentials');
         }
         $authenticationData = $this->userConnection($userCredentials['email']);
 
