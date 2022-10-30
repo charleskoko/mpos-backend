@@ -2,24 +2,24 @@
 
 namespace App\Mail;
 
+use App\Models\Invoice;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendCodeResetPassword extends Mailable
+class SendReceipt extends Mailable
 {
     use Queueable, SerializesModels;
-    public $code;
-
+    public Invoice $invoice;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($code)
+    public function __construct(Invoice $invoice)
     {
-        $this->code = $code;
+        $this->invoice = $invoice;
     }
 
     /**
@@ -29,6 +29,6 @@ class SendCodeResetPassword extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.sendCodeResetPassword')->subject('Demande de réinitialisation de mot de passe')->from('noreply@charly-app.tech','noreply');
+        return $this->markdown('emails.sendReceipt')->subject('Reçu de Charly App')->from('recu@charly-app.tech','Mon business via Charly App');
     }
 }

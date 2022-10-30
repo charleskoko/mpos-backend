@@ -7,6 +7,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\SendReceiptByEmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('password/reset', [ResetPasswordController::class])->name('password.reset');
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('logout', [AuthenticationController::class, 'logout'])->name('user.logout');
+        Route::post('receipt-email/{order}', [SendReceiptByEmailController::class,'sendReceiptByEmail'])->name('receipt.email');
 
         Route::group(['prefix' => 'products'], function () {
             Route::get('/', [ProductController::class, 'index'])->name('products.index');

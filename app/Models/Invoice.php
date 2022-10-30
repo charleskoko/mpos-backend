@@ -37,4 +37,13 @@ class Invoice extends Model
     {
         return $this->belongsTo(User::class,'user_id','id');
     }
+
+    public function getInvoiceTotal(){
+        $sum = 0;
+        $orderLineItems = $this->order->orderLineItems;
+        foreach ($orderLineItems as $orderLineItem){
+            $sum += $orderLineItem->price * $orderLineItem->amount;
+        }
+      return $sum;
+    }
 }
