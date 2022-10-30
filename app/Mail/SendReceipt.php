@@ -29,6 +29,6 @@ class SendReceipt extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.sendReceipt')->subject('Reçu de Charly App')->from('recu@charly-app.tech','Mon business via Charly App');
+        return $this->markdown('emails.sendReceipt')->subject('Reçu de Charly App')->from('no_reply@charly-app.tech','Mon business via Charly App');
     }
 }

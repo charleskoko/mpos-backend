@@ -29,6 +29,6 @@ class SendCodeResetPassword extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.sendCodeResetPassword')->subject('Demande de réinitialisation de mot de passe')->from('noreply@charly-app.tech','noreply');
+        return $this->markdown('emails.sendCodeResetPassword')->subject('Demande de réinitialisation de mot de passe')->from('no_reply@charly-app.tech','noreply');
     }
 }
