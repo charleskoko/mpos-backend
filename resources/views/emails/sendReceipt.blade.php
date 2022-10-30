@@ -23,8 +23,7 @@
         <tbody>
        <tr>
             <td colspan="1" style="padding:20px;">
-                <h3 style="color:#262262;font-size:22px;margin-bottom:0;text-align:center;">Merci pour votre
-                    commande !</h3>
+                <h3 style="color:#262262;font-size:22px;margin-bottom:0;text-align:center;">Merci pour votre achat!</h3>
             <!--     <p style="color:#64607D;font-size:14px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Praesentium iste ipsa numquam odio dolores, nam.</p> -->
             </td>
@@ -34,8 +33,8 @@
                 <table style="width:100%;border:1px solid #ddd;">
                     <thead>
                     <tr>
-                        <th style="padding:12px;background:#eee;">confirmation de commande #</th>
-                        <th style="text-align:right;padding:12px;background:#eee;">{{$invoice->order->number}}</th>
+                        <th style="padding:12px;background:#eee;">Numéro de commande </th>
+                        <th style="text-align:right;padding:12px;background:#eee;">#{{$invoice->order->number}}</th>
                     </tr>
                     </thead>
                     <tbody>
