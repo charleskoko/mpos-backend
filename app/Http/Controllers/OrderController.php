@@ -39,7 +39,7 @@ class OrderController extends Controller
         $date = $request->input('date');
         $authUser = Auth::user();
         if ($date == null) {
-            $authUserOrders = $authUser->orders()->whereDate('created_at', '=', Carbon::today()->toDateString())->get();
+            $authUserOrders = $authUser->orders;
             return $this->success([OrderResource::collection($authUserOrders)],);
 
         }

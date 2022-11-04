@@ -30,18 +30,21 @@ class OrderControllerTest extends TestCase
 
     public function testUserCanCreateOrder()
     {
+        $selectedProduct = Product::inRandomOrder()->first();
+
         $newOrderData = [
             'addOrderLineItem' => [
                 [
-                    'product_id' => $orderItemOneProduct = Product::inRandomOrder()->first()->id,
-                    'amount' => $orderItemOneAmount = $this->faker->randomFloat(2, 100, 10000),
-                    'price' => $orderItemOnePrice = $this->faker->randomDigit(),
+
+                    'product_id' => $selectedProduct->id,
+                    'product_label' => $selectedProduct->label,
+                    'amount' => $this->faker->randomFloat(2, 100, 10000),
+                    'price' => $this->faker->randomDigit(),
                 ],
             ]
         ];
         $response = $this->post(route('orders.store'), $newOrderData);
         $response->assertStatus(201);
-        $this->assertDatabaseHas('order_line_items', ['product_id' => $orderItemOneProduct, 'amount' => $orderItemOneAmount, 'price' => $orderItemOnePrice]);
     }
 
     public function testUserCanSeeHisOrder()

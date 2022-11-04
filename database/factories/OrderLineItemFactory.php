@@ -20,8 +20,10 @@ class OrderLineItemFactory extends Factory
      */
     public function definition()
     {
+        $selectedProduct = Product::inRandomOrder()->first();
         return [
-            'product_id' => Product::inRandomOrder()->first()->id,
+            'product_id' =>  $selectedProduct->id,
+            'product_label' => $selectedProduct->label,
             'order_id' => Order::inRandomOrder()->first()->id,
             'price' => $this->faker->randomFloat(2,1000,20000),
             'amount' => $this->faker->randomDigit()

@@ -51,11 +51,12 @@ class DetermineInvoiceNumberTest extends TestCase
 
     public function testFirstInvoiceNumber()
     {
-
+        $selectedProduct = Product::inRandomOrder()->first();
         $newOrderData = [
             'addOrderLineItem' => [
                 [
-                    'product_id' => Product::inRandomOrder()->first()->id,
+                    'product_id' => $selectedProduct->id,
+                    'product_label' => $selectedProduct->label,
                     'amount' => $this->faker->randomFloat(2, 100, 10000),
                     'price' => $this->faker->randomDigit(),
                 ],
@@ -70,12 +71,13 @@ class DetermineInvoiceNumberTest extends TestCase
 
     public function testVerificationInvoiceNumberIncrementation()
     {
-
+        $selectedProduct = Product::inRandomOrder()->first();
         $this->createInvoices($this->user, $this->order,10);
         $newOrderData = [
             'addOrderLineItem' => [
                 [
-                    'product_id' => Product::inRandomOrder()->first()->id,
+                    'product_id' => $selectedProduct->id,
+                    'product_label' => $selectedProduct->label,
                     'amount' => $this->faker->randomFloat(2, 100, 10000),
                     'price' => $this->faker->randomDigit(),
                 ],
@@ -90,6 +92,7 @@ class DetermineInvoiceNumberTest extends TestCase
 
 
     public function testVerificationInvoiceNumberOtherUser(){
+        $selectedProduct = Product::inRandomOrder()->first();
         $this->createInvoices($this->user, $this->order, 10);
         $newUser = User::factory()->create();
         $product = Product::factory()->create(
@@ -99,7 +102,8 @@ class DetermineInvoiceNumberTest extends TestCase
         $newOrderData = [
             'addOrderLineItem' => [
                 [
-                    'product_id' => $product->id,
+                    'product_id' => $selectedProduct->id,
+                    'product_label' => $selectedProduct->label,
                     'amount' => $this->faker->randomFloat(2, 100, 10000),
                     'price' => $this->faker->randomDigit(),
                 ],
