@@ -18,6 +18,7 @@ class OrderLineItemResource extends JsonResource
         return [
             'id' => $orderLineItem->id,
             'product' => ProductResource::make($orderLineItem->product),
+            'product_label' => $orderLineItem->product_label,
             'price' => $orderLineItem->price,
             'amount' => $orderLineItem->amount,
         ];

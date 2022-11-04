@@ -25,7 +25,9 @@ class OrderPostRequest extends FormRequest
     {
 
         return [
-            'addOrderLineItem.*.product_id' => 'required|uuid|exists:products,id',
+            'addOrderLineItem.*.product_id' => 'nullable|uuid',
+            'addOrderLineItem.*.order_line_item_note' => 'nullable|string',
+            'addOrderLineItem.*.product_label' => 'required|string',
             'addOrderLineItem.*.amount' => 'required|numeric',
             'addOrderLineItem.*.price' => 'required|numeric',
         ];

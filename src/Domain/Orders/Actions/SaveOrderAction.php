@@ -18,8 +18,10 @@ class SaveOrderAction
             'user_id' => Auth::id()
         ]);
         foreach ($makeOrderLineItemsData->orderLineItemsData as $orderLineItem) {
+
             OrderLineItem::create([
                 'product_id' => $orderLineItem->productId,
+                'product_label' => $orderLineItem->productLabel,
                 'order_id' => $order->id,
                 'amount' => $orderLineItem->amount,
                 'price' => $orderLineItem->price,

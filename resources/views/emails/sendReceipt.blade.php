@@ -40,7 +40,7 @@
                     <tbody>
                     @foreach($invoice->order->orderLineItems as $orderLineItem)
                         <tr>
-                            <td style="padding:12px;">{{$orderLineItem->product->label}} ({{$orderLineItem->amount}})</td>
+                            <td style="padding:12px;">{{$orderLineItem->product_label}} ({{$orderLineItem->amount}})</td>
                             <td style="text-align:right;padding:12px;"> {{$orderLineItem->price * $orderLineItem->amount}} FCFA</td>
                         </tr>
                     @endforeach

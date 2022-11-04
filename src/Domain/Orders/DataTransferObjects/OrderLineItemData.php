@@ -6,6 +6,8 @@ class OrderLineItemData
 {
 
     public ?string $productId;
+    public string $productLabel;
+   //public ?string $orderLineItemNote;
     public float $price;
     public float $amount;
 
@@ -13,9 +15,10 @@ class OrderLineItemData
     {
         $dto = new self();
         $dto->productId = $validatedOrderLineData['product_id'];
+        $dto->productLabel = $validatedOrderLineData['product_label'];
+        //$dto->orderLineItemNote = $validatedOrderLineData['order_line_item_note'];
         $dto->price = $validatedOrderLineData['price'];
         $dto->amount = $validatedOrderLineData['amount'];
-
         return $dto;
 
     }
