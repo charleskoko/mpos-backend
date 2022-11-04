@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('order_line_items', function (Blueprint $table) {
-            $table->text('product_label');
+            $table->text('product_label')->nullable();
             $table->text('note')->nullable();
         });
     }
