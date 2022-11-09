@@ -44,6 +44,7 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::group(['prefix' => 'orders'], function () {
             Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+            Route::get('/dashboard-info', [OrderController::class, 'dashboardInfo'])->name('orders.dashboard-info');
             Route::post('/', [OrderController::class, 'store'])->name('orders.store');
             Route::delete('/{order},', [OrderController::class, 'destroy'])->name('orders.destroy');
         });

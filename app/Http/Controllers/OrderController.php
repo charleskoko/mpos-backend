@@ -7,6 +7,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Domain\Invoices\Actions\CreateInvoiceAction;
 use Domain\Orders\Actions\CreateOrderAction;
 use Domain\Orders\DataTransferObjects\MakeOrderLineItemsData;
@@ -34,16 +35,19 @@ class OrderController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function dashboardInfo(Request $request): JsonResponse
     {
         $date = $request->input('date');
-        $authUser = Auth::user();
-        if ($date == null) {
-            $authUserOrders = $authUser->orders;
-            return $this->success([OrderResource::collection($authUserOrders)],);
+        $period = $request->input('period');
+        $authUserOrders = $this->getOrderDependingOfDateAndPeriod($date, $period);
+        return $this->success([OrderResource::collection($authUserOrders)],);
 
-        }
-        $authUserOrders = $authUser->orders()->whereDay('created_at', '=', Carbon::create($date))->get();
+    }
+
+    public function index()
+    {
+        $authUser = Auth::user();
+        $authUserOrders = $authUser->orders;
         return $this->success([OrderResource::collection($authUserOrders)],);
 
     }
@@ -89,5 +93,34 @@ class OrderController extends Controller
         $order->delete();
 
         return $this->success([], 204);
+    }
+
+    private function getOrderDependingOfDateAndPeriod($date, $period)
+    {
+        $authUser = Auth::user();
+
+        switch ($period) {
+            case '1j':
+                $dateToCarbonFormat = Carbon::create($date);
+                return $authUser->orders()->whereDay('created_at', '=', $dateToCarbonFormat)->get();
+            case '1s':
+                $endDateToCarbonFormat = Carbon::create($date);
+                $startDateToCarbonFormat = CarbonImmutable::create($date)->subWeek();
+                return $authUser->orders()->whereBetween('created_at', [$startDateToCarbonFormat, $endDateToCarbonFormat])->get();
+            case '1m':
+                $endDateToCarbonFormat = Carbon::create($date);
+                $startDateToCarbonFormat = CarbonImmutable::create($date)->subMonth();
+                return $authUser->orders()->whereBetween('created_at', [$startDateToCarbonFormat, $endDateToCarbonFormat])->get();
+            case '3m':
+                $endDateToCarbonFormat = Carbon::create($date);
+                $startDateToCarbonFormat = CarbonImmutable::create($date)->subMonths(3);
+                return $authUser->orders()->whereBetween('created_at', [$startDateToCarbonFormat, $endDateToCarbonFormat])->get();
+            case'1a':
+                $endDateToCarbonFormat = Carbon::create($date);
+                $startDateToCarbonFormat = CarbonImmutable::create($date)->subYear();
+                return $authUser->orders()->whereBetween('created_at', [$startDateToCarbonFormat, $endDateToCarbonFormat])->get();
+        }
+
+
     }
 }
