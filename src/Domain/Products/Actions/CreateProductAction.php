@@ -11,7 +11,6 @@ class CreateProductAction
     {
         return Product::create(
             [
-
                 'label' => $productData->label,
                 'sale_price' => $productData->salePrice,
                 'user_id' => $productData->userId,

@@ -6,6 +6,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RefundController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SendReceiptByEmailController;
 use Illuminate\Http\Request;
@@ -47,6 +48,10 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/dashboard-info', [OrderController::class, 'dashboardInfo'])->name('orders.dashboard-info');
             Route::post('/', [OrderController::class, 'store'])->name('orders.store');
             Route::delete('/{order},', [OrderController::class, 'destroy'])->name('orders.destroy');
+        });
+
+        Route::group(['prefix' => 'refund'], function () {
+            Route::post('/', [RefundController::class, 'store'])->name('refund.store');
         });
 
         Route::group(['prefix' => 'invoices'], function () {

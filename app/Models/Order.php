@@ -28,7 +28,7 @@ class Order extends Model
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function orderLineItems(): HasMany
@@ -36,7 +36,12 @@ class Order extends Model
         return $this->hasMany(OrderLineItem::class);
     }
 
-    public function invoice() : BelongsTo
+    public function refunds(): HasMany
+    {
+        return $this->hasMany(Refund::class);
+    }
+
+    public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class);
     }

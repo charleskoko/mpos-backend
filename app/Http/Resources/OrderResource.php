@@ -20,6 +20,7 @@ class OrderResource extends JsonResource
             'id' => $order->id,
             'number' => $order->number,
             'order_line_items' => OrderLineItemResource::collection($order->orderLineItems),
+            'refunds' => RefundResource::collection($order->refunds),
             'created_at'=> $order->created_at,
             'invoice' => $order->invoice
         ];

@@ -19,6 +19,7 @@ class OrderLineItemData
         //$dto->orderLineItemNote = $validatedOrderLineData['order_line_item_note'];
         $dto->price = $validatedOrderLineData['price'];
         $dto->amount = $validatedOrderLineData['amount'];
+
         return $dto;
 
     }
