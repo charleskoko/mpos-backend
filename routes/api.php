@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CodeCheckController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RefundController;
@@ -33,6 +34,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('password/code/check', [CodeCheckController::class,'codeChecking'])->name('code.check');
     Route::post('password/reset', [ResetPasswordController::class])->name('password.reset');
     Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('metrics', [MetricsController::class, 'fetchMetrics']);
         Route::post('logout', [AuthenticationController::class, 'logout'])->name('user.logout');
         Route::post('receipt-email/{order}', [SendReceiptByEmailController::class,'sendReceiptByEmail'])->name('receipt.email');
 
